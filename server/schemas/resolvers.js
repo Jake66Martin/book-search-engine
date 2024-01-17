@@ -1,26 +1,43 @@
-const { User } = require('../models/User');
+const { User, Book } = require('../models/index');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
 
     Query: {
 
-        getSingleUser: async (parent, { user, params }) => {
-            const foundUser = await User.findOne({
-              $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
-            });
-      
-            if (!foundUser) {
-              throw new Error('Cannot find a user with this id!');
-            }
-      
-            return foundUser;
+        user: async (parent, { userId }) => {
+            return User.findOne({ _id:userId });
           },
+
+
 
     },
 
     Mutation: {
 
+        addUser: async (parent, { name, email, password }) => {
+            const user = await User.create({ name, email, password });
+            const token = signToken(user);
+      
+            return { token, user };
+          },
+
+          login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+      
+            if (!user) {
+              throw AuthenticationError;
+            }
+      
+            const correctPw = await user.isCorrectPassword(password);
+      
+            if (!correctPw) {
+              throw AuthenticationError;
+            }
+      
+            const token = signToken(profile);
+            return { token, user };
+          },
     }
 
 }
