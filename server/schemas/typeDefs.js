@@ -8,8 +8,22 @@ type Book {
     image: String,
     link: String,
     title: String
+}
+
+type User {
+    _id: ID,
+    username: String,
+    email: String,
+    password: String,
 
 }
+
+type Auth {
+    token: ID!
+    profile: Profile
+  }
+
+
 
 `;
 
