@@ -30,11 +30,11 @@ type User {
 
 type Auth {
     token: ID!
-    profile: Profile
+    user: User
   }
 
 type Query {
-    user: User
+    me: User
 }
 
 type Mutation {
