@@ -21,7 +21,7 @@ input bookArgs {
 
 type User {
     _id: ID,
-    username: String,
+    userName: String,
     email: String,
     password: String,
     savedbooks: [Book]
