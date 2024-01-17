@@ -11,6 +11,7 @@ type Book {
 }
 
 input bookArgs {
+    userId: ID,
     authors: [String],
     description: String,
     bookId: String,

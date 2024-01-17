@@ -36,11 +36,28 @@ const resolvers = {
       return { token, user };
     },
 
+    // saveBook: async (parent, { input }, context) => {
+    //   const { authors, description, bookId, image, link, title } = input;
+    //   if (context.user) {
+    //     return User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       {
+    //         $addToSet: { savedBooks: authors, description, bookId, image, link, title },
+    //       },
+    //       {
+    //         new: true,
+    //         runValidators: true,
+    //       }
+    //     );
+    //   }
+    //   throw AuthenticationError;
+    // },
+
     saveBook: async (parent, { input }, context) => {
       const { authors, description, bookId, image, link, title } = input;
       if (context.user) {
         return User.findOneAndUpdate(
-          { _id: context.user._id },
+          { _id: userId },
           {
             $addToSet: { savedBooks: authors, description, bookId, image, link, title },
           },
