@@ -24,7 +24,18 @@ type Auth {
     profile: Profile
   }
 
+type Query {
+    user: User
+}
 
+type Mutation {
+    addUser(name: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+
+    saveBook(userId: ID!, book: String!): User
+    removeBook(book: String!): User
+
+}
 
 `;
 
