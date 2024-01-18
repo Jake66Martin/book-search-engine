@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useQuery } from "@apollo/client";
+import { QUERY_ME } from "../utils/queries";
 import {
   Container,
   Card,
@@ -7,8 +9,7 @@ import {
   Col
 } from 'react-bootstrap';
 
-// import { useQuery } from "@apollo/client";
-// import {QUERY_ME} from "../utils/queries"
+
 
 
 // import { getMe, deleteBook } from '../utils/API';
@@ -17,11 +18,14 @@ import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
-  
+  const { loading, data } = useQuery(QUERY_ME);
+  console.log(loading)
+  console.log(data)
+
 
 
   // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
+  // const userDataLength = Object.keys(userData).length;
 
   // useEffect(() => {
   //   const getUserData = async () => {
@@ -47,6 +51,8 @@ const SavedBooks = () => {
 
   //   getUserData();
   // }, [userDataLength]);
+
+  const { me } = data;
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
