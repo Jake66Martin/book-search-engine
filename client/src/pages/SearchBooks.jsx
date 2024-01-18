@@ -85,7 +85,8 @@ const SearchBooks = () => {
           bookId: bookToSave.bookId,
           description: bookToSave.description,
           image: bookToSave.image,
-          title: bookToSave.title
+          title: bookToSave.title,
+          link: bookToSave.link
           }
         }
       });
@@ -148,6 +149,7 @@ const SearchBooks = () => {
                     <Card.Title>{book.title}</Card.Title>
                     <p className='small'>Authors: {book.authors}</p>
                     <Card.Text>{book.description}</Card.Text>
+                    <Card.Link>{book.link}</Card.Link>
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
