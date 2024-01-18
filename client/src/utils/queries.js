@@ -4,10 +4,11 @@ export const QUERY_ME = gql`
   query me{
     me {
     _id
-    email
     username
+    email
     password
     savedbooks {
+      _id
       authors
       bookId
       description
