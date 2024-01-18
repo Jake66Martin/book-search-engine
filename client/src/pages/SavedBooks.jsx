@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { useQuery } from "@apollo/client";
+// import { useState } from 'react';
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
+import {REMOVE_BOOK} from "../utils/mutations"
 import {
   Container,
   Card,
@@ -12,19 +13,19 @@ import {
 
 
 
-// import { getMe, deleteBook } from '../utils/API';
+// import { deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   // const [userData, setUserData] = useState({});
   const { loading, data} = useQuery(QUERY_ME);
+  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
-  // console.log(data)
+
 
   const userData = data?.me || {}
 
-  console.log(userData.username)
 
  
 
@@ -74,14 +75,20 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      const response = await removeBook({
+        variables: {
+          bookId: bookId
+        }
+      });
+      console.log(bookId)
+      console.log(response)
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
+      // const updatedUser = await response.json();
+      // setUserData(updatedUser);
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
@@ -113,8 +120,8 @@ const SavedBooks = () => {
         <Row>
           {userData.savedbooks?.map((book) => {
             return (
-              <Col md="4">
-                <Card key={book.bookId} border='dark'>
+              <Col key={book.bookId} md="4">
+                <Card  border='dark'>
                   {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
                   <Card.Body>
                     <Card.Title>{book.title}</Card.Title>
