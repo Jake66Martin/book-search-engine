@@ -42,7 +42,7 @@ const resolvers = {
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
-            $addToSet: { savedBooks: authors, description, bookId, image, link, title },
+            $addToSet: { savedbooks: authors, description, bookId, image, link, title },
           },
           {
             new: true,
@@ -53,22 +53,6 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    saveBook: async (parent, { input }, context) => {
-      const { authors, description, bookId, image, link, title } = input;
-      if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: userId },
-          {
-            $addToSet: { savedBooks: authors, description, bookId, image, link, title },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-      }
-      throw AuthenticationError;
-    },
 
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {

@@ -19,11 +19,9 @@ import { removeBookId } from '../utils/localStorage';
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
   const { loading, data } = useQuery(QUERY_ME);
-  console.log(loading)
-  console.log(data)
+  
 
-
-
+ 
   // use this to determine if `useEffect()` hook needs to run again
   // const userDataLength = Object.keys(userData).length;
 
@@ -52,7 +50,7 @@ const SavedBooks = () => {
   //   getUserData();
   // }, [userDataLength]);
 
-  const { me } = data;
+
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -79,7 +77,7 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  if (!userDataLength) {
+  if (!loading) {
     return <h2>LOADING...</h2>;
   }
 
@@ -92,12 +90,12 @@ const SavedBooks = () => {
       </div>
       <Container>
         <h2 className='pt-5'>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
+          {userData.savedbooks.length
+            ? `Viewing ${userData.savedbooks.length} saved ${userData.savedbooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
         </h2>
         <Row>
-          {userData.savedBooks.map((book) => {
+          {userData.savedbooks.map((book) => {
             return (
               <Col md="4">
                 <Card key={book.bookId} border='dark'>
