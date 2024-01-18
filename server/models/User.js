@@ -6,7 +6,7 @@ const bookSchema = require('./Book');
 
 const userSchema = new Schema(
   {
-    userName: {
+    username: {
       type: String,
       required: true,
       unique: true,
