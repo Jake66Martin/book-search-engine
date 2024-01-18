@@ -17,9 +17,16 @@ import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
   const { loading, data} = useQuery(QUERY_ME);
 
+  // console.log(data)
+
+  const userData = data?.me || {}
+
+  console.log(userData.username)
+
+ 
 
 
 
@@ -83,7 +90,7 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  if (!loading) {
+  if (loading) {
     return <h2>LOADING...</h2>;
   }
 
