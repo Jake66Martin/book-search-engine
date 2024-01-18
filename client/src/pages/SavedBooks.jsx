@@ -18,7 +18,9 @@ import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data} = useQuery(QUERY_ME);
+
+
 
 
   
@@ -85,21 +87,24 @@ const SavedBooks = () => {
     return <h2>LOADING...</h2>;
   }
 
+  
+
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      {/* { !loading ? ( */}
+      <div className="text-light bg-dark p-5 fluid">
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>
       </div>
       <Container>
         <h2 className='pt-5'>
-          {userData.savedbooks.length
+          {userData.savedbooks?.length
             ? `Viewing ${userData.savedbooks.length} saved ${userData.savedbooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
         </h2>
         <Row>
-          {userData.savedbooks.map((book) => {
+          {userData.savedbooks?.map((book) => {
             return (
               <Col md="4">
                 <Card key={book.bookId} border='dark'>
