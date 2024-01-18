@@ -8,9 +8,6 @@ mutation addUser($userName: String!, $email: String!, $password: String!) {
       user {
         _id
         email
-        password
-        savedbooks {
-        }
         userName
       }
     }
