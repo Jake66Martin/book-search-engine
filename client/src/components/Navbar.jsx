@@ -6,6 +6,10 @@ import LoginForm from './LoginForm';
 
 import Auth from '../utils/auth';
 
+const books = function () {
+  window.location()
+}
+
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +30,7 @@ const AppNavbar = () => {
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
+                  <Nav.Link as={Link} to='/saved' onClick={books}>
                     See Your Books
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>

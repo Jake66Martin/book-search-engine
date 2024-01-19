@@ -36,6 +36,8 @@ const SearchBooks = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+
+
     if (!searchInput) {
       return false;
     }
